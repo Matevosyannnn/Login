@@ -1,0 +1,124 @@
+.LoginForm {
+    flex-grow: 1;
+    max-width: 318px;
+}
+
+.formTitle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.formTitle > h1 {
+    margin-top: 16px;
+    font-size: 26px;
+    font-weight: 600;
+    line-height: 40px;
+    color: #444444;
+}
+
+.formTitle > p {
+    margin-top: 5px;
+    line-height: 18px;
+    color: #878484;
+}
+
+.formTitle > p > a {
+    font-weight: 600;
+    color: #1BA584;
+}
+
+.inputsWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 24px;
+}
+
+.inputTitle {
+    width: max-content;
+    position: relative;
+    line-height: 17px;
+    color: #444444;
+}
+
+.inputTitle::after {
+    content: "*";
+    position: absolute;
+    top: 0;
+    right: -7px;
+    color: #FF3D00;
+}
+
+.input {
+    width: 100%;
+    height: 38px;
+    margin-top: 6px;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 0 24px;
+    border-radius: 20px;
+}
+
+.error {
+    text-align: center;
+    font-weight: 500;
+    color: red;
+}
+
+.loginButton {
+    position: relative;
+    width: 100%;
+    height: 38px;
+    color: #ffffff;
+    font-weight: 600;
+    border-radius: 20px;
+    transition: font-size .1s ease;
+    background: rgb(29,166,132);
+    background: linear-gradient(90deg, rgba(29,166,132,1) 0%, rgba(190,220,124,1) 100%);
+}
+
+.loginButton:hover {
+    font-size: 16px;
+}
+
+.LoginForm > p {
+    width: max-content;
+    position: relative;
+    margin: 24px auto 0 auto;
+    font-weight: 600;
+    color: #444444;
+}
+
+.LoginForm > p::before {
+    content: "";
+    position: absolute;
+    top: 6px;
+    right: 36px;
+    width: 140px;
+    height: 1px;
+    background-color: #444444;
+}
+
+.LoginForm > p::after {
+    content: "";
+    position: absolute;
+    top: 6px;
+    left: 36px;
+    width: 140px;
+    height: 1px;
+    background-color: #444444;
+}
+
+.socialBtnsWrapper {
+    display: flex;
+    justify-content: center;
+    gap: 53px;
+    margin-top: 11px;
+}
+
+.socialBtnsWrapper > button{
+    width: 45px;
+    height: 39px;
+    background-color: transparent;
+}
