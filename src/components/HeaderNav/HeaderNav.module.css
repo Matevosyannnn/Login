@@ -1,0 +1,15 @@
+.nav {
+    flex-grow: 1;
+    max-width: 250px;
+}
+
+.navList {
+    display: flex;
+    justify-content: space-between;
+}
+
+.navListItem > a {
+    font-size: 16px;
+    font-weight: 500;
+    color: #FFFFFF;
+}
