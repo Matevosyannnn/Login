@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { selectUser, userActions } from '../../store/slices/userSlice'
+import { selectError, selectUser, userActions } from '../../store/slices/userSlice'
 import IMAGES from '../../assets/images/index'
 import GoogleS from '../../assets/SVG/GoogleS'
 import AppleS from '../../assets/SVG/AppleS'
@@ -8,18 +8,29 @@ import style from './LoginForm.module.css'
 
 const LoginForm = () => {
     const user = useSelector(selectUser)
-    const [error, setError] = useState(false)
+    const error = useSelector(selectError)
     const usernameRef = useRef(null)
     const passwordRef = useRef(null)
     const dispatch = useDispatch()
 
     const handleSubmit = (e) => {
-        const data = {
-          username: usernameRef.current.value,
-          password: passwordRef.current.value
+        const checkValues = !usernameRef.current.value || !passwordRef.current.value
+        if (!checkValues && !user) {            
+            dispatch(userActions.setError(''))
+            const data = {
+              username: usernameRef.current.value,
+              password: passwordRef.current.value
+            }
+            
+            dispatch(userActions.login(data))
+        } 
+
+        if (checkValues && !user) {
+            dispatch(userActions.setError('Fill in the required fields'))
         }
 
-        dispatch(userActions.login(data))
+        usernameRef.current.value = ''
+        passwordRef.current.value = ''
 
         e.preventDefault()
     }
@@ -56,9 +67,9 @@ const LoginForm = () => {
               />
           </div>
           <p className={style.error} style={{display: error ? 'block' : 'none'}}>
-            {error ? 'Incorrect login or password' : ''}
+            {error}
           </p>
-          <button disabled={user?.id} className={style.loginButton}>Sign In</button>
+          <button className={style.loginButton}>Sign In</button>
         </div>
 
         <p>OR</p>
