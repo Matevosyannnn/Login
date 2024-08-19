@@ -7,7 +7,7 @@ const createAuthSlice = buildCreateSlice({
 
 const userSlice = createAuthSlice({
     name: "user",
-    initialState: {},
+    initialState: null,
     reducers: (create) => ({
         login: create.asyncThunk(
             async (data, thunkAPI) => {
