@@ -1,6 +1,6 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { selectUser } from '../../store/slices/userSlice'
+import { selectUser, userActions } from '../../store/slices/userSlice'
 import IMAGES from '../../assets/images/index'
 import GoogleS from '../../assets/SVG/GoogleS'
 import AppleS from '../../assets/SVG/AppleS'
@@ -18,6 +18,8 @@ const LoginForm = () => {
           username: usernameRef.current.value,
           password: passwordRef.current.value
         }
+
+        dispatch(userActions.login(data))
 
         e.preventDefault()
     }
