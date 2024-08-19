@@ -10,6 +10,7 @@ const userSlice = createAuthSlice({
     initialState: null,
     reducers: (create) => ({
         logOut: (state) => {
+            localStorage.clear()
             return state = null
         },
         login: create.asyncThunk(
@@ -64,10 +65,6 @@ const userSlice = createAuthSlice({
             {
                 fulfilled: (state, {payload}) => {
                     localStorage.setItem('token', payload.token)
-                },
-                rejected: (state, {payload}) => {
-                    localStorage.clear()
-                    return state = null
                 }
             }
         )
