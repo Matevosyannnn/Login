@@ -9,6 +9,9 @@ const userSlice = createAuthSlice({
     name: "user",
     initialState: null,
     reducers: (create) => ({
+        logOut: (state) => {
+            return state = null
+        },
         login: create.asyncThunk(
             async (data, thunkAPI) => {
                 const { dispatch, rejectWithValue } = thunkAPI
@@ -54,6 +57,7 @@ const userSlice = createAuthSlice({
                     const response = await refreshTokenAPI(data)
                     return response.data
                 } catch (error) {
+                    dispatch(userActions.logOut())
                     return rejectWithValue(error)
                 }
             },
