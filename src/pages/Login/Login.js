@@ -16,7 +16,7 @@ const Login = () => {
     if (token) {
       dispatch(userActions.getUser(token))
     }
-  }, [])
+  })
 
   return (
     <div className={style.wrapper}>
