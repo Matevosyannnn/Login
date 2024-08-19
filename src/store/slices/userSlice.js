@@ -42,8 +42,8 @@ const userSlice = createAuthSlice({
                 }
             },
             {
-                fulfilled: (state, {payload}) => {                    
-                    return state = payload.data
+                fulfilled: (state, {payload}) => {
+                    return state = payload
                 }
             }
         ),
