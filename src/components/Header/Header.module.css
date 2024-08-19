@@ -1,0 +1,29 @@
+.Header {
+    padding: 0 30px;
+    background-color: #031B10;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    position: relative;
+    max-width: 1140px;
+    height: 60px;
+    margin: 0 auto;
+}
+
+@media (max-width: 480px) {
+    .Header {
+        width: 100%;
+        padding: 10px 10px 0 10px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: transparent;
+    }
+
+    .container {
+        display: block;
+        height: 45px;
+    }
+}
