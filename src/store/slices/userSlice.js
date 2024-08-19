@@ -34,6 +34,10 @@ const userSlice = createAuthSlice({
                     const response = await getUserAPI(data)
                     return response.data
                 } catch (error) {
+                    if (error.response.status === 401) {
+                        dispatch(userActions.refreshToken(localStorage.getItem('refreshToken')))
+                    }
+                    
                     return rejectWithValue(error)
                 }
             },
