@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { selectUser } from "../../store/slices/userSlice"
+import { selectUser, userActions } from "../../store/slices/userSlice"
 import UserS from '../../assets/SVG/UserS'
 import style from './User.module.css'
 
@@ -25,6 +25,7 @@ const User = () => {
     }
 
     const logOut = () => {
+        dispatch(userActions.logOut())
         userRef.current.style.maxHeight = null
     }
 
