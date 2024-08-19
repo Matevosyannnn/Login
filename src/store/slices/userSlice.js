@@ -1,5 +1,6 @@
 import { asyncThunkCreator, buildCreateSlice } from "@reduxjs/toolkit";
 import { getUserAPI, loginAPI, refreshTokenAPI } from "../API/userAPI";
+import handleErrorMessage from "../../utils/handleErrorMessage";
 
 const createAuthSlice = buildCreateSlice({
     creators: { asyncThunk: asyncThunkCreator }
@@ -16,6 +17,9 @@ const userSlice = createAuthSlice({
         selectError: (state) => state.error,
     },
     reducers: (create) => ({
+        setError: (state, {payload}) => {
+            state.error = payload
+        },
         logOut: (state) => {
             localStorage.clear()
             state.user = null
@@ -35,7 +39,11 @@ const userSlice = createAuthSlice({
                 fulfilled: (state, {payload}) => {
                     localStorage.setItem('token', payload.token)
                     localStorage.setItem('refreshToken', payload.refreshToken)
+                    state.error = ''
                 },
+                rejected: (state, {payload}) => {    
+                    state.error = handleErrorMessage(payload)
+                }
             },
         ),
         getUser: create.asyncThunk(
@@ -63,6 +71,7 @@ const userSlice = createAuthSlice({
                 const { dispatch, rejectWithValue } = thunkAPI
                 try {
                     const response = await refreshTokenAPI(data)
+                    dispatch(userActions.getUser(response.data.token))
                     return response.data
                 } catch (error) {
                     dispatch(userActions.logOut())
