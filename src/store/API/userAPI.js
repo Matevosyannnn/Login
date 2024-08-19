@@ -31,3 +31,19 @@ export const getUserAPI = async (token) => {
 
     return response
 }
+
+export const refreshTokenAPI = async (refreshToken) => {
+    const response = await authAxios({
+        method: 'POST',
+        url: '/refresh',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        data: {
+            refreshToken: refreshToken,
+            expiresInMins: 1,
+        }
+    })
+
+    return response
+}
