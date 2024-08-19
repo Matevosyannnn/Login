@@ -60,6 +60,10 @@ const userSlice = createAuthSlice({
             {
                 fulfilled: (state, {payload}) => {
                     localStorage.setItem('token', payload.token)
+                },
+                rejected: (state, {payload}) => {
+                    localStorage.clear()
+                    return state = null
                 }
             }
         )
