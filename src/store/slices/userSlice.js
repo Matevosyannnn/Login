@@ -7,11 +7,18 @@ const createAuthSlice = buildCreateSlice({
 
 const userSlice = createAuthSlice({
     name: "user",
-    initialState: null,
+    initialState: {
+        user: null,
+        error: '',
+    },
+    selectors: {
+        selectUser: (state) => state.user,
+        selectError: (state) => state.error,
+    },
     reducers: (create) => ({
         logOut: (state) => {
             localStorage.clear()
-            return state = null
+            state.user = null
         },
         login: create.asyncThunk(
             async (data, thunkAPI) => {
@@ -47,7 +54,7 @@ const userSlice = createAuthSlice({
             },
             {
                 fulfilled: (state, {payload}) => {
-                    return state = payload
+                    state.user = payload
                 }
             }
         ),
@@ -71,5 +78,5 @@ const userSlice = createAuthSlice({
     })
 })
 
-export const selectUser = state => state.user
+export const { selectError, selectUser } = userSlice.selectors
 export const {reducer: userReducer, actions: userActions} = userSlice
