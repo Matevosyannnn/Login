@@ -18,3 +18,16 @@ export const loginAPI = async ({username, password}) => {
 
     return response
 }
+
+export const getUserAPI = async (token) => {
+    const response = await authAxios({
+        method: 'GET',
+        url: '/me',
+        headers: {
+            'Authorization': `Bearer ${token}`, 
+            'Content-Type': 'application/json'
+        }
+    })
+
+    return response
+}
