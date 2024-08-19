@@ -1,0 +1,76 @@
+.wrapper {
+    position: relative;
+    max-width: 1920px;
+    height: 100%;
+    overflow: auto;
+    background-image: linear-gradient(to right top, #026f01, #005913, #004418, #002f17, #031b10);
+}
+
+.Login {
+    padding: 0 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.windowLogin {
+    flex-grow: 1;
+    max-width: 1140px;
+    min-height: 520px;
+    margin: 5vh 0;
+    height: 80vh;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    border-radius: 23px;
+    background-color: #ffffff;
+    overflow: hidden;
+}
+
+.loginForm  {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+}
+
+@media (max-width: 767px) { 
+    .windowLogin {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+    }
+}
+
+@media (max-width: 480px) { 
+    .Login {
+        height: 100%;
+        padding: 0;
+    }
+
+    .windowLogin {
+        height: 100%;
+        border-radius: 0;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr;
+        grid-template-areas: 
+        "bg"
+        "form";
+    }
+
+    .loginForm {
+        height: max-content;
+        border-top-left-radius: 23px;
+        border-top-right-radius: 23px;
+        box-shadow: 0 -22px 0 #3FB283;
+        grid-area: form;
+    }
+
+    .loginBg {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        grid-area: bg;
+    }
+}
+
+
