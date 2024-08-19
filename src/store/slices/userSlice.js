@@ -52,9 +52,14 @@ const userSlice = createAuthSlice({
                 const { dispatch, rejectWithValue } = thunkAPI
                 try {
                     const response = await refreshTokenAPI(data)
-                    return response
+                    return response.data
                 } catch (error) {
                     rejectWithValue(error)
+                }
+            },
+            {
+                fulfilled: (state, {payload}) => {
+                    localStorage.setItem('token', payload.token)
                 }
             }
         )
