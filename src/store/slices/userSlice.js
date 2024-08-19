@@ -17,7 +17,7 @@ const userSlice = createAuthSlice({
                     dispatch(userActions.getUser(response.data.token))
                     return response.data
                 } catch (error) {
-                    rejectWithValue(error)
+                    return rejectWithValue(error)
                 }
             },
             {
@@ -54,7 +54,7 @@ const userSlice = createAuthSlice({
                     const response = await refreshTokenAPI(data)
                     return response.data
                 } catch (error) {
-                    rejectWithValue(error)
+                    return rejectWithValue(error)
                 }
             },
             {
