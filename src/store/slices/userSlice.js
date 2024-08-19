@@ -1,5 +1,5 @@
 import { asyncThunkCreator, buildCreateSlice } from "@reduxjs/toolkit";
-import { getUserAPI, loginAPI } from "../API/userAPI";
+import { getUserAPI, loginAPI, refreshTokenAPI } from "../API/userAPI";
 
 const createAuthSlice = buildCreateSlice({
     creators: { asyncThunk: asyncThunkCreator }
@@ -15,15 +15,15 @@ const userSlice = createAuthSlice({
                 try {
                     const response = await loginAPI(data)
                     dispatch(userActions.getUser(response.data.token))
-                    return response
+                    return response.data
                 } catch (error) {
-
+                    rejectWithValue(error)
                 }
             },
             {
                 fulfilled: (state, {payload}) => {
-                    localStorage.setItem('token', payload.data.token)
-                    localStorage.setItem('refreshToken', payload.data.refreshToken)
+                    localStorage.setItem('token', payload.token)
+                    localStorage.setItem('refreshToken', payload.refreshToken)
                 },
             },
         ),
@@ -32,14 +32,25 @@ const userSlice = createAuthSlice({
                 const { dispatch, rejectWithValue } = thunkAPI
                 try {
                     const response = await getUserAPI(data)
-                    return response
+                    return response.data
                 } catch (error) {
-                    
+                    return rejectWithValue(error)
                 }
             },
             {
-                fulfilled: (state, {payload}) => {
+                fulfilled: (state, {payload}) => {                    
                     return state = payload.data
+                }
+            }
+        ),
+        refreshToken: create.asyncThunk(
+            async (data, thunkAPI) => {
+                const { dispatch, rejectWithValue } = thunkAPI
+                try {
+                    const response = await refreshTokenAPI(data)
+                    return response
+                } catch (error) {
+                    rejectWithValue(error)
                 }
             }
         )
